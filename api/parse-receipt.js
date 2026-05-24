@@ -133,21 +133,15 @@ Rules:
 
   }
 
-  catch(error) {
+    catch (error) {
+      console.error("Receipt parsing failed:", error);
 
-    console.error(
-      error
-    );
+      const statusCode = error.status || error.statusCode || 500;
 
-    return res
-      .status(500)
-      .json({
-
-        error:
-          "Receipt parsing failed"
-
+      return res.status(statusCode).json({
+        error: error.name || "ReceiptParsingError",
+        message: error.message || "Receipt parsing failed",
+        status: statusCode
       });
-
-  }
-
+    }
 }
