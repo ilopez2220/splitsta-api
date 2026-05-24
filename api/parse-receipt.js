@@ -119,10 +119,32 @@ Rules:
         });
 
 
-    const parsed =
-      JSON.parse(
+      let rawText =
         response.output_text
-      );
+          .trim();
+
+
+      rawText =
+        rawText
+          .replace(
+            /^```json\s*/i,
+            ""
+          )
+          .replace(
+            /^```\s*/i,
+            ""
+          )
+          .replace(
+            /```$/i,
+            ""
+          )
+          .trim();
+
+
+      const parsed =
+        JSON.parse(
+          rawText
+        );
 
 
     return res
