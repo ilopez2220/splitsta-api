@@ -72,32 +72,39 @@ export default async function handler(
                   type:
                     "input_text",
 
-                  text:
-`
-Parse this restaurant receipt.
+                text:
+                `
+                Parse this restaurant receipt.
 
-Return ONLY valid JSON:
+                Return ONLY valid JSON:
 
-{
-  "items":[
-    {
-      "name":"",
-      "cost":0
-    }
-  ],
+                {
+                  "items":[
+                    {
+                      "name":"",
+                      "cost":0
+                    }
+                  ],
 
-  "total":0
-}
+                  "subtotal":0,
+                  "tax":0,
+                  "tip":0,
+                  "total":0
+                }
 
-Rules:
-- Include purchased food items
-- Exclude tax
-- Exclude subtotal
-- Exclude payment info
-- Exclude tip suggestions
-- Match names/prices intelligently
-`
-
+                Rules:
+                - Include purchased food items
+                - Exclude payment info
+                - Exclude card info
+                - Exclude authorization codes
+                - Match names/prices intelligently
+                - Extract subtotal when present
+                - Extract tax when present
+                - Extract tip when present
+                - If no tip exists, return 0
+                - Extract final total
+                - Return numbers only (no "$")
+                `
                 },
 
                 {
